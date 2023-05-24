@@ -53,6 +53,12 @@ export default function App() {
         await deleteDoc(docRef)
     }
 
+    const sortedNotes = notes.sort((a, b) => {
+        const dateA = new Date(a.updatedAt);
+        const dateB = new Date(b.updatedAt);
+        return dateB - dateA;
+    })
+
     return (
         <main>
             {
@@ -64,6 +70,7 @@ export default function App() {
                         className="split"
                     >
                         <Sidebar
+                            sortedNotes={sortedNotes}
                             notes={notes}
                             currentNote={currentNote}
                             setCurrentNoteId={setCurrentNoteId}
